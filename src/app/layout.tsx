@@ -28,7 +28,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${dmSans.variable} ${dmMono.variable} antialiased`}>
+			<body
+				className={`${dmSans.variable} ${dmMono.variable} antialiased overflow-x-hidden`}
+			>
 				{children}
 			</body>
 		</html>
