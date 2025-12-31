@@ -1,14 +1,59 @@
 "use client";
+import { useState } from "react";
 import { LogoFullLight } from "@/components/icons";
 import { Button } from "../components/ui/button";
-import { RiDiscordFill, RiTwitterXFill, RiMailAddLine } from "@remixicon/react";
+import {
+	RiDiscordFill,
+	RiTwitterXFill,
+	RiMailAddLine,
+	RiCheckLine,
+	RiErrorWarningLine,
+} from "@remixicon/react";
 import { StarsBackground } from "@/components/ui/stars-background";
 import { Flare } from "../components/assets/flare";
 import { FlipWords } from "@/components/ui/flip-words";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
 	const currentYear = new Date().getFullYear();
+	const [email, setEmail] = useState("");
+	const [status, setStatus] = useState<
+		"idle" | "loading" | "success" | "error"
+	>("idle");
+	const [message, setMessage] = useState("");
+
+	const handleNewsletterSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		if (!email) return;
+
+		setStatus("loading");
+		setMessage("");
+
+		try {
+			const response = await fetch("/api/newsletter", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email }),
+			});
+
+			const data = await response.json();
+
+			if (response.ok) {
+				setStatus("success");
+				setMessage(data.message || "Successfully subscribed!");
+				setEmail("");
+			} else {
+				setStatus("error");
+				setMessage(data.error || "Something went wrong");
+			}
+		} catch {
+			setStatus("error");
+			setMessage("Failed to subscribe. Please try again.");
+		}
+	};
 	return (
 		<div className="relative bg-black text-white overflow-hidden">
 			<StarsBackground starDensity={0.0004} />
@@ -145,7 +190,7 @@ export default function Home() {
 
 					<motion.form
 						className="relative mt-6"
-						onSubmit={event => event.preventDefault()}
+						onSubmit={handleNewsletterSubmit}
 						initial={{ opacity: 0, y: 10 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true, amount: 0.8 }}
@@ -156,16 +201,59 @@ export default function Home() {
 								type="email"
 								required
 								placeholder="you@ravix.studio"
-								className="w-full rounded-xl sm:rounded-2xl border border-white/15 bg-white/5 px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg font-sans text-white placeholder:text-neutral-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/30 transition"
+								value={email}
+								onChange={e => setEmail(e.target.value)}
+								disabled={status === "loading" || status === "success"}
+								className="w-full rounded-xl sm:rounded-2xl border border-white/15 bg-white/5 px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg font-sans text-white placeholder:text-neutral-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/30 transition disabled:opacity-50 disabled:cursor-not-allowed"
 							/>
 							<Button
 								type="submit"
-								icon={<RiMailAddLine />}
+								icon={
+									status === "loading" ? (
+										<motion.div
+											animate={{ rotate: 360 }}
+											transition={{
+												duration: 1,
+												repeat: Infinity,
+												ease: "linear",
+											}}
+											className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+										/>
+									) : status === "success" ? (
+										<RiCheckLine />
+									) : (
+										<RiMailAddLine />
+									)
+								}
 								className="w-full md:w-auto"
+								disabled={status === "loading" || status === "success"}
 							>
-								join the newsletter
+								{status === "loading"
+									? "subscribing..."
+									: status === "success"
+									? "subscribed!"
+									: "join the newsletter"}
 							</Button>
 						</div>
+						<AnimatePresence>
+							{message && (
+								<motion.p
+									initial={{ opacity: 0, y: -10 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: -10 }}
+									className={`mt-3 text-sm flex items-center gap-2 ${
+										status === "success" ? "text-green-400" : "text-red-400"
+									}`}
+								>
+									{status === "success" ? (
+										<RiCheckLine className="w-4 h-4" />
+									) : (
+										<RiErrorWarningLine className="w-4 h-4" />
+									)}
+									{message}
+								</motion.p>
+							)}
+						</AnimatePresence>
 					</motion.form>
 
 					<motion.div

@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
-	"uppercase font-mono text-sm sm:text-base leading-5 -tracking-[1.5%] px-3 sm:px-4 py-3 sm:py-3.5 flex gap-2 items-center justify-center transition-all duration-300 ease-out active:scale-95 relative overflow-hidden group",
+	"uppercase font-mono text-sm sm:text-base leading-5 -tracking-[1.5%] px-3 sm:px-4 py-3 sm:py-3.5 flex gap-2 items-center justify-center transition-all duration-300 ease-out active:scale-95 relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100",
 	{
 		variants: {
 			variant: {
