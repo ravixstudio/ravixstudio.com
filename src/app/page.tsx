@@ -39,7 +39,7 @@ export default function Home() {
 					</motion.div>
 
 					<motion.p
-						className="text-base font-mono leading-5 -tracking-[1.5%]"
+						className="text-sm sm:text-base font-mono leading-5 -tracking-[1.5%] text-center"
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
