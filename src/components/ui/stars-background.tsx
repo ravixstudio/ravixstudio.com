@@ -29,14 +29,27 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
 }) => {
 	const [stars, setStars] = useState<StarProps[]>([]);
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 768);
+		};
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
 
 	const generateStars = useCallback(
 		(width: number, height: number): StarProps[] => {
 			const area = width * height;
-			const numStars = Math.floor(area * starDensity);
+			// Reduce star count on mobile for better performance
+			const adjustedDensity = isMobile ? starDensity * 0.3 : starDensity;
+			const numStars = Math.floor(area * adjustedDensity);
 			return Array.from({ length: numStars }, () => {
+				// Disable twinkling on mobile for better performance
 				const shouldTwinkle =
-					allStarsTwinkle || Math.random() < twinkleProbability;
+					!isMobile && (allStarsTwinkle || Math.random() < twinkleProbability);
 				return {
 					x: Math.random() * width,
 					y: Math.random() * height,
@@ -55,6 +68,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
 			twinkleProbability,
 			minTwinkleSpeed,
 			maxTwinkleSpeed,
+			isMobile,
 		]
 	);
 

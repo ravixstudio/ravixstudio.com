@@ -13,26 +13,27 @@ export default function Home() {
 		<div className="relative bg-black text-white overflow-hidden">
 			<StarsBackground starDensity={0.0004} />
 
-			<div className="relative flex min-h-screen items-center justify-center px-6 py-16">
+			<div className="relative flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 sm:py-16 md:px-10">
 				<motion.div
-					className="flex flex-col items-center gap-8 relative"
+					className="flex flex-col items-center gap-6 sm:gap-8 relative w-full max-w-5xl"
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, ease: "easeOut" }}
 				>
 					<motion.div
-						className="absolute -top-52"
+						className="absolute -top-32 sm:-top-52 left-1/2 -translate-x-1/2 w-full max-w-[100vw] overflow-hidden"
 						initial={{ opacity: 0, scale: 0.9 }}
 						animate={{ opacity: 1, scale: 1 }}
 						transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
 					>
-						<Flare />
+						<Flare className="w-full h-auto" />
 					</motion.div>
 
 					<motion.div
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+						className="scale-75 sm:scale-100"
 					>
 						<LogoFullLight />
 					</motion.div>
@@ -52,28 +53,31 @@ export default function Home() {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
 					>
-						<h1 className="text-[64px] font-sans font-medium -tracking-[1.5%] leading-[100%] text-center">
-							<span className="text-neutral-400">Engineering for </span>
+						<h1 className="text-[32px] sm:text-[52px] lg:text-[64px] font-sans font-medium -tracking-[1.5%] leading-[110%] sm:leading-[105%] text-center px-4 flex flex-col items-center">
+							<span className="text-neutral-400">Engineering for</span>
 							<FlipWords
-								words={["Real Problems", "Community", "Your Growth"]}
+								words={["Real Problems", "The Community", "Your Growth"]}
 								duration={3000}
-								className="text-[64px] font-sans font-medium bg-gradient-to-r from-white via-white to-blue-500 bg-clip-text text-transparent"
+								className="text-[32px] sm:text-[52px] lg:text-[64px] font-sans font-medium bg-gradient-to-r from-white via-white to-blue-500 bg-clip-text text-transparent"
 							/>
 						</h1>
-						<p className="text-neutral-400 font-sans text-xl leading-5 -tracking-[1.5%] text-center">
+						<p className="text-neutral-400 font-sans text-sm sm:text-base md:text-lg leading-6 sm:leading-7 -tracking-[1.5%] text-center max-w-xl px-4">
 							A shared space for designers, developers and builders
 						</p>
 					</motion.div>
 
-					<div className="flex items-center gap-3">
+					<div className="flex w-full max-w-md mx-auto flex-col items-center gap-3 sm:max-w-none sm:flex-row sm:justify-center">
 						<motion.a
 							href="https://discord.gg/PkX5csktKG"
 							target="_blank"
 							initial={{ opacity: 0, x: -30 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
+							className="w-full sm:w-auto"
 						>
-							<Button icon={<RiDiscordFill />}>join the discord</Button>
+							<Button className="w-full" icon={<RiDiscordFill />}>
+								join the discord
+							</Button>
 						</motion.a>
 
 						<motion.a
@@ -82,8 +86,13 @@ export default function Home() {
 							initial={{ opacity: 0, x: 30 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
+							className="w-full sm:w-auto"
 						>
-							<Button icon={<RiTwitterXFill />} variant="outlined">
+							<Button
+								className="w-full"
+								icon={<RiTwitterXFill />}
+								variant="outlined"
+							>
 								follow on x
 							</Button>
 						</motion.a>
@@ -91,16 +100,16 @@ export default function Home() {
 				</motion.div>
 			</div>
 
-			<section className="relative px-6 pb-24">
+			<section className="relative px-4 sm:px-5 pb-16 sm:pb-20 md:pb-24">
 				<motion.div
-					className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-white/10 via-white/5 to-transparent p-8 shadow-[0_30px_120px_rgba(0,0,0,0.6)] backdrop-blur md:p-12"
+					className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-transparent p-5 sm:p-8 shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur md:p-12"
 					initial={{ opacity: 0, y: 40 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true, amount: 0.4 }}
+					viewport={{ once: true, amount: 0.2 }}
 					transition={{ duration: 0.7, ease: "easeOut" }}
 				>
-					<div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-blue-500/20 blur-3xl" />
-					<div className="absolute -left-10 bottom-0 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
+					<div className="absolute -right-12 sm:-right-24 -top-12 sm:-top-24 h-32 w-32 sm:h-56 sm:w-56 rounded-full bg-blue-500/20 blur-3xl" />
+					<div className="absolute -left-5 sm:-left-10 bottom-0 h-24 w-24 sm:h-40 sm:w-40 rounded-full bg-white/10 blur-3xl" />
 
 					<motion.p
 						className="relative mb-3 inline-flex items-center rounded-full border border-white/10 bg-white/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-neutral-200"
@@ -113,7 +122,7 @@ export default function Home() {
 					</motion.p>
 
 					<motion.h2
-						className="relative text-4xl font-sans font-medium leading-tight -tracking-[1.5%]"
+						className="relative text-2xl sm:text-3xl md:text-4xl font-sans font-medium leading-tight -tracking-[1.5%]"
 						initial={{ opacity: 0, y: 10 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true, amount: 0.8 }}
@@ -122,7 +131,7 @@ export default function Home() {
 						Stay ahead of our drops
 					</motion.h2>
 					<motion.p
-						className="relative mt-3 max-w-2xl text-lg text-neutral-200 leading-7"
+						className="relative mt-3 max-w-2xl text-sm sm:text-base md:text-lg text-neutral-200 leading-6 sm:leading-7"
 						initial={{ opacity: 0, y: 10 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true, amount: 0.8 }}
@@ -140,12 +149,12 @@ export default function Home() {
 						viewport={{ once: true, amount: 0.8 }}
 						transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
 					>
-						<div className="flex w-full flex-col gap-4 md:flex-row">
+						<div className="flex w-full flex-col gap-3 sm:gap-4 md:flex-row">
 							<input
 								type="email"
 								required
 								placeholder="you@ravix.studio"
-								className="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-base font-sans text-white placeholder:text-neutral-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/30 transition"
+								className="w-full rounded-xl sm:rounded-2xl border border-white/15 bg-white/5 px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg font-sans text-white placeholder:text-neutral-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white/30 transition"
 							/>
 							<Button
 								type="submit"
@@ -158,7 +167,7 @@ export default function Home() {
 					</motion.form>
 
 					<motion.div
-						className="relative mt-6 flex flex-wrap gap-3 text-sm text-neutral-200"
+						className="relative mt-6 flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-200"
 						initial={{ opacity: 0, y: 10 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true, amount: 0.8 }}
@@ -177,16 +186,16 @@ export default function Home() {
 				</motion.div>
 			</section>
 
-			<footer className="relative overflow-hidden bg-black px-6 pb-10 pt-8 md:pb-14 md:pt-10">
+			<footer className="relative overflow-hidden bg-black px-4 pb-8 pt-6 sm:px-6 md:pb-14 md:pt-10">
 				<motion.div
-					className="absolute left-6 right-6 top-6 h-px bg-linear-to-r from-transparent via-white/12 to-transparent"
+					className="mx-auto h-px w-full max-w-5xl bg-gradient-to-r from-transparent via-white/12 to-transparent"
 					initial={{ scaleX: 0, opacity: 0 }}
 					whileInView={{ scaleX: 1, opacity: 1 }}
 					viewport={{ once: true, amount: 0.6 }}
 					transition={{ duration: 0.6, ease: "easeOut" }}
 				/>
 				<motion.div
-					className="absolute right-6 top-12 text-[10px] font-mono uppercase tracking-[0.24em] text-white/60"
+					className="mx-auto mt-3 w-full max-w-5xl px-2 text-center sm:text-right text-[9px] sm:text-[10px] md:text-xs font-mono uppercase tracking-[0.15em] sm:tracking-[0.18em] text-white/70"
 					initial={{ opacity: 0, y: -6 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true, amount: 0.7 }}
@@ -195,21 +204,21 @@ export default function Home() {
 					copyright {currentYear} © ravix studio
 				</motion.div>
 				<motion.div
-					className="relative mt-10 flex min-h-40 items-end justify-center md:mt-12 md:min-h-55"
-					initial={{ opacity: 0, y: 20 }}
+					className="relative mx-auto mt-4 flex min-h-[90px] w-full max-w-6xl items-end justify-center sm:mt-14 md:mt-16 sm:min-h-[200px]"
+					initial={{ opacity: 0, y: 24 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true, amount: 0.45 }}
+					viewport={{ once: true, amount: 0.3 }}
 					transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
 				>
 					<span
-						className="pointer-events-none select-none text-[22vw] leading-[0.8] font-black uppercase tracking-[0.12em] text-transparent"
+						className="pointer-events-none select-none text-[30vw] sm:text-[24vw] md:text-[22vw] leading-[0.8] font-black uppercase tracking-[0.12em] text-transparent"
 						style={{
-							WebkitTextStroke: "1.6px rgba(255,255,255,0.12)",
-							opacity: 0.65,
+							WebkitTextStroke: "1px rgba(255,255,255,0.12)",
+							opacity: 0.72,
 							WebkitMaskImage:
-								"linear-gradient(to bottom, transparent 0%, black 25%, black 60%, transparent 90%)",
+								"linear-gradient(to bottom, transparent 0%, black 30%, black 62%, transparent 92%)",
 							position: "absolute",
-							bottom: "-38%",
+							bottom: "-34%",
 							left: "50%",
 							transform: "translateX(-50%)",
 						}}

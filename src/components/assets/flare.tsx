@@ -7,6 +7,7 @@ export function Flare({ className }: { className?: string }) {
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 			className={className}
+			style={{ maxWidth: "100vw", height: "auto" }}
 		>
 			<g filter="url(#filter0_f_333_1528)">
 				<path

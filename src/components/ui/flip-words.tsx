@@ -14,6 +14,16 @@ export const FlipWords = ({
 }) => {
 	const [currentWord, setCurrentWord] = useState(words[0]);
 	const [isAnimating, setIsAnimating] = useState<boolean>(false);
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth < 768);
+		};
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
 
 	// thanks for the fix Julian - https://github.com/Julian-AT
 	const startAnimation = useCallback(() => {
@@ -51,10 +61,10 @@ export const FlipWords = ({
 				}}
 				exit={{
 					opacity: 0,
-					y: -40,
-					x: 40,
-					filter: "blur(8px)",
-					scale: 1,
+					y: -30,
+					x: 15,
+					filter: "blur(6px)",
+					scale: 0.98,
 					position: "absolute",
 				}}
 				className={cn(
