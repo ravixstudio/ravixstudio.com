@@ -8,6 +8,7 @@ import { FlipWords } from "@/components/ui/flip-words";
 import { motion } from "framer-motion";
 
 export default function Home() {
+	const currentYear = new Date().getFullYear();
 	return (
 		<div className="relative bg-black text-white overflow-hidden">
 			<StarsBackground starDensity={0.0004} />
@@ -191,7 +192,7 @@ export default function Home() {
 					viewport={{ once: true, amount: 0.7 }}
 					transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
 				>
-					copyright 2025 © ravix studio
+					copyright {currentYear} © ravix studio
 				</motion.div>
 				<motion.div
 					className="relative mt-10 flex min-h-40 items-end justify-center md:mt-12 md:min-h-55"
