@@ -55,11 +55,13 @@ export default function Home() {
 					>
 						<h1 className="text-[32px] sm:text-[52px] lg:text-[64px] font-sans font-medium -tracking-[1.5%] leading-[110%] sm:leading-[105%] text-center px-4 flex flex-col items-center">
 							<span className="text-neutral-400">Engineering for</span>
-							<FlipWords
-								words={["Real Problems", "The Community", "Your Growth"]}
-								duration={3000}
-								className="text-[32px] sm:text-[52px] lg:text-[64px] font-sans font-medium bg-gradient-to-r from-white via-white to-blue-500 bg-clip-text text-transparent"
-							/>
+							<span className="overflow-hidden block">
+								<FlipWords
+									words={["Real Problems", "The Community", "Your Growth"]}
+									duration={3000}
+									className="text-[32px] sm:text-[52px] lg:text-[64px] font-sans font-medium bg-gradient-to-r from-white via-white to-blue-500 bg-clip-text text-transparent"
+								/>
+							</span>
 						</h1>
 						<p className="text-neutral-400 font-sans text-sm sm:text-base md:text-lg leading-6 sm:leading-7 -tracking-[1.5%] text-center max-w-xl px-4">
 							A shared space for designers, developers and builders
