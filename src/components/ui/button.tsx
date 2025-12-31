@@ -1,3 +1,4 @@
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
@@ -22,13 +23,17 @@ export function Button({
 	icon,
 	...props
 }: {
-	children: React.ReactNode;
+	children: ReactNode;
 	variant?: "contained" | "outlined";
 	className?: string;
-	icon?: React.ReactNode;
-}) {
+	icon?: ReactNode;
+} & ButtonHTMLAttributes<HTMLButtonElement>) {
 	return (
-		<button className={cn(buttonVariants({ variant }), className)} {...props}>
+		<button
+			type={props.type ?? "button"}
+			className={cn(buttonVariants({ variant }), className)}
+			{...props}
+		>
 			{icon && (
 				<div className="h-5 w-5 mr-2 transition-transform group-hover:rotate-12 group-hover:scale-110">
 					{icon}
