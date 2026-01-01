@@ -1,6 +1,6 @@
 "use client";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, LayoutGroup } from "motion/react";
+import React, { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export const FlipWords = ({
@@ -14,15 +14,15 @@ export const FlipWords = ({
 }) => {
 	const [currentWord, setCurrentWord] = useState(words[0]);
 	const [isAnimating, setIsAnimating] = useState<boolean>(false);
-	const [isMobile, setIsMobile] = useState(false);
+	const [isAndroid, setIsAndroid] = useState(false);
 
 	useEffect(() => {
-		const checkMobile = () => {
-			setIsMobile(window.innerWidth < 768);
+		// Detect Android devices - blur filter animations are buggy on Android
+		const checkAndroid = () => {
+			const userAgent = navigator.userAgent.toLowerCase();
+			setIsAndroid(/android/i.test(userAgent));
 		};
-		checkMobile();
-		window.addEventListener("resize", checkMobile);
-		return () => window.removeEventListener("resize", checkMobile);
+		checkAndroid();
 	}, []);
 
 	// thanks for the fix Julian - https://github.com/Julian-AT
@@ -63,7 +63,7 @@ export const FlipWords = ({
 					opacity: 0,
 					y: -30,
 					x: 15,
-					filter: "blur(6px)",
+					filter: isAndroid ? undefined : "blur(6px)",
 					scale: 0.98,
 					position: "absolute",
 				}}
@@ -77,8 +77,16 @@ export const FlipWords = ({
 				{currentWord.split(" ").map((word, wordIndex) => (
 					<motion.span
 						key={word + wordIndex}
-						initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
-						animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+						initial={{
+							opacity: 0,
+							y: 10,
+							filter: isAndroid ? undefined : "blur(8px)",
+						}}
+						animate={{
+							opacity: 1,
+							y: 0,
+							filter: isAndroid ? undefined : "blur(0px)",
+						}}
 						transition={{
 							delay: wordIndex * 0.3,
 							duration: 0.3,
@@ -88,8 +96,16 @@ export const FlipWords = ({
 						{word.split("").map((letter, letterIndex) => (
 							<motion.span
 								key={word + letterIndex}
-								initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
-								animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+								initial={{
+									opacity: 0,
+									y: 10,
+									filter: isAndroid ? undefined : "blur(8px)",
+								}}
+								animate={{
+									opacity: 1,
+									y: 0,
+									filter: isAndroid ? undefined : "blur(0px)",
+								}}
 								transition={{
 									delay: wordIndex * 0.3 + letterIndex * 0.05,
 									duration: 0.2,

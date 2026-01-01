@@ -104,7 +104,7 @@ export default function Home() {
 								<FlipWords
 									words={["Real Problems", "The Community", "Your Growth"]}
 									duration={3000}
-									className="text-[32px] sm:text-[52px] lg:text-[64px] font-sans font-medium bg-gradient-to-r from-white via-white to-blue-500 bg-clip-text text-transparent"
+									className="text-[32px] sm:text-[52px] lg:text-[64px] font-sans font-medium text-white"
 								/>
 							</span>
 						</h1>
