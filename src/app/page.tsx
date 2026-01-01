@@ -294,17 +294,18 @@ export default function Home() {
 					copyright {currentYear} © ravix studio
 				</motion.div>
 				<motion.div
-					className="relative mx-auto mt-4 flex min-h-[90px] w-full max-w-6xl items-end justify-center sm:mt-14 md:mt-16 sm:min-h-[200px]"
+					className="relative mx-auto mt-4 flex min-h-[90px] w-full max-w-5xl items-end justify-center sm:mt-14 md:mt-16 sm:min-h-[200px]"
 					initial={{ opacity: 0, y: 24 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true, amount: 0.3 }}
 					transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
 				>
 					<span
-						className="pointer-events-none select-none text-[30vw] sm:text-[24vw] md:text-[22vw] leading-[0.8] font-black uppercase tracking-[0.12em] text-transparent"
+						className="pointer-events-none select-none leading-[0.8] font-black uppercase tracking-[0.12em] text-transparent"
 						style={{
-							WebkitTextStroke: "1px rgba(255,255,255,0.12)",
-							opacity: 0.72,
+							fontSize: "clamp(90px, 22vw, 280px)",
+							WebkitTextStroke: "1px rgba(255,255,255,0.22)",
+							opacity: 0.85,
 							WebkitMaskImage:
 								"linear-gradient(to bottom, transparent 0%, black 30%, black 62%, transparent 92%)",
 							position: "absolute",
